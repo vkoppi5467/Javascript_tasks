@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank account</title>
+    <script>
+       let balance = 500;
+        let bankAccount = {
+            accountName: '',
+            accountNumber: '',
+    
+            checkBalance: function () {
+                if (this.accountName === '' || this.accountNumber === '') {
+                    alert("Please enter account details to proceed");
+                } else {
+                    alert(`You have Rupees ${balance} in your account, ${this.accountName}`);
+                }
+            },
+            withdraw: function () {
+                if (this.accountName === '' || this.accountNumber === '') {
+                    alert("Please enter account details to proceed");
+                } else {
+                    let amount = Number(prompt("Please enter the amount to withdraw"));
+                    if (amount > balance) {
+                        alert("Insufficient funds");
+                    } else {
+                        balance -= amount;
+                        alert(`Your balance is Rupees ${balance} after withdrawing Rupees ${amount}`);
+                    }
+                }
+            },
+            deposit: function () {
+                if (this.accountName === '' || this.accountNumber === '') {
+                    alert("Please enter account details to proceed");
+                } else {
+                    let amount = Number(prompt("Please enter the amount to deposit"));
+                    balance += amount;
+                    alert(`The balance after deposit is Rupees ${balance}`);
+                }
+            },
+        };
+
+        function updateAccountDetails(event) {
+            event.preventDefault();
+            bankAccount.accountName = document.getElementById("accountName").value;
+            bankAccount.accountNumber = document.getElementById("accountNumber").value;
+            document.getElementById("details").innerHTML = `Account Name: ${bankAccount.accountName}, Account Number: ${bankAccount.accountNumber}`;
+        }
+        
+    </script>
+</head>
+<body>
+    <h1>The Bank Account</h1>
+    <br />
+    <br />
+    <form onsubmit="updateAccountDetails(event)">
+        <label for="accountNumber">Account Number</label><br />
+        <input type="number" id="accountNumber" ><br />
+        <label for="accountName">Account Name</label><br />
+        <input type="text" id="accountName" ><br />
+        <input type="submit">
+        <input type="reset" >
+    </form>
+    <p id="details"></p>
+    <button onclick="bankAccount.checkBalance()">Check Balance</button>
+    <button onclick="bankAccount.deposit()">Deposit</button>
+    <button onclick="bankAccount.withdraw()">Withdraw</button>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Calculator</title>
+</head>
+<body>
+    <h1>Loan Calculator</h1>
+    <div>
+        <label for="loanAmount">Loan Amount:</label>
+        <input type="number" id="loanAmount" required>
+    </div>
+    <div>
+        <label for="interestRate">Interest Rate (%):</label>
+        <input type="number" id="interestRate" required>
+    </div>
+    <div>
+        <label for="loanTerm">Loan Term (years):</label>
+        <input type="number" id="loanTerm" required>
+    </div>
+    <div>
+        <label for="emisPaid">EMIs Paid:</label>
+        <input type="number" id="emisPaid" required>
+    </div>
+    <button onclick="calculateLoan()">Calculate Loan</button>
+    <button onclick="checkLoanStatus()">Check Loan Status</button>
+
+    <h2 id="result"></h2>
+
+    <script>
+        class Loan {
+            constructor(loanAmount, interestRate, loanTerm) {
+                this.loanAmount = loanAmount;
+                this.interestRate = interestRate / 100 / 12; // Convert annual interest rate to monthly
+                this.loanTerm = loanTerm * 12; // Convert loan term from years to months
+            }
+
+            calculateMonthlyPayment() {
+                const { loanAmount, interestRate, loanTerm } = this;
+                return (loanAmount * interestRate * Math.pow(1 + interestRate, loanTerm)) / 
+                       (Math.pow(1 + interestRate, loanTerm) - 1);
+            }
+
+            checkLoanStatus(emisPaid) {
+                const monthlyPayment = this.calculateMonthlyPayment();
+                const totalPaid = monthlyPayment * emisPaid;
+                const remainingBalance = (this.loanAmount * Math.pow(1 + this.interestRate, emisPaid)) - totalPaid;
+                return {
+                    totalPaid,
+                    remainingBalance,
+                    monthlyPayment
+                };
+            }
+        }
+
+        function calculateLoan() {
+            const loanAmount = parseFloat(document.getElementById('loanAmount').value);
+            const interestRate = parseFloat(document.getElementById('interestRate').value);
+            const loanTerm = parseFloat(document.getElementById('loanTerm').value);
+
+            const loan = new Loan(loanAmount, interestRate, loanTerm);
+            const monthlyPayment = loan.calculateMonthlyPayment();
+
+            document.getElementById('result').innerText = `Monthly Payment (EMI): $${monthlyPayment.toFixed(2)}`;
+        }
+
+        function checkLoanStatus() {
+            const loanAmount = parseFloat(document.getElementById('loanAmount').value);
+            const interestRate = parseFloat(document.getElementById('interestRate').value);
+            const loanTerm = parseFloat(document.getElementById('loanTerm').value);
+            const emisPaid = parseFloat(document.getElementById('emisPaid').value);
+
+            const loan = new Loan(loanAmount, interestRate, loanTerm);
+            const status = loan.checkLoanStatus(emisPaid);
+
+            document.getElementById('result').innerText = `Total Paid: $${status.totalPaid.toFixed(2)}, Remaining Balance: $${status.remainingBalance.toFixed(2)}, Monthly Payment: $${status.monthlyPayment.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>

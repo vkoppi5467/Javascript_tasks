@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Manager</title>
+</head>
+<body>
+    <h1>Loan Application</h1>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Enter your name"><br><br>
+
+    <label for="income">Monthly Income:</label>
+    <input type="number" id="income" placeholder="Enter monthly income"><br><br>
+
+    <label for="balance">Account Balance:</label>
+    <input type="number" id="balance" placeholder="Enter account balance"><br><br>
+
+    <label for="loanAmount">Loan Amount:</label>
+    <input type="number" id="loanAmount" placeholder="Enter loan amount"><br><br>
+
+    <button onclick="applyForLoan()">Apply for Loan</button>
+
+    <h2>Loan Status:</h2>
+    <div id="loanStatus"></div>
+
+    <script>
+        class Loan {
+            constructor(name, income, balance, loanAmount) {
+                this.name = name;
+                this.income = income;
+                this.balance = balance;
+                this.loanAmount = loanAmount;
+                this.approved = false; 
+            }
+
+            approve() {
+                this.approved = true;
+            }
+
+            reject() {
+                this.approved = false;
+            }
+
+            getStatus() {
+                return this.approved ? "Approved" : "Rejected";
+            }
+        }
+
+        class LoanManager {
+            constructor() {
+                this.loans = [];
+            }
+
+            applyLoan(loan) {
+                
+                if (loan.income >= 30000 || loan.balance >= loan.loanAmount) {
+                    loan.approve();
+                } else {
+                    loan.reject();
+                }
+                this.loans.push(loan);
+                return loan.getStatus();
+            }
+        }
+
+        const loanManager = new LoanManager();
+
+        function applyForLoan() {
+            const name = document.getElementById('name').value;
+            const income = parseFloat(document.getElementById('income').value);
+            const balance = parseFloat(document.getElementById('balance').value);
+            const loanAmount = parseFloat(document.getElementById('loanAmount').value);
+
+            if (!name || isNaN(income) || isNaN(balance) || isNaN(loanAmount)) {
+                document.getElementById('loanStatus').innerText = "Please fill out all fields.";
+                return;
+            }
+
+            const loan = new Loan(name, income, balance, loanAmount);
+            const status = loanManager.applyLoan(loan);
+            document.getElementById('loanStatus').innerText = `Loan for ${name}: ${status}`;
+        }
+    </script>
+</body>
+</html>

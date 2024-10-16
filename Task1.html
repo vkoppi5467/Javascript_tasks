@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login page using javascript</title>
+    <script>
+        function checkLogin() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+          
+            if (username === "Admin" && password === "Admin@123") {
+              alert("Login successful!");
+            } else {
+              alert("Incorrect username or password.");
+            }
+          }
+    </script>
+    
+
+</head>
+<body>
+    <label for="username">Username:</label>
+    <input type="text" id="username">
+
+    <label for="password">Password:</label>
+    <input type="password" id="password">
+
+    <button onclick="checkLogin()">Login</button>
+    <br/>
+</body>
+<!-- </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page using JavaScript</title>
+    <script>
+        function checkLogin() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+          
+            if (username === "Admin") {
+                if (password === "Admin@123") {
+                    alert("Login successful!");
+                } else {
+                    alert("Incorrect password.");
+                }
+            } else {
+                alert("Incorrect username.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <label for="username">Username:</label>
+    <input type="text" id="username">
+
+    <label for="password">Password:</label>
+    <input type="password" id="password">
+
+    <button onclick="checkLogin()">Login</button>
+    <br/>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example2</title>
+</head>
+<body>
+    <form id="loginForm" onsubmit="return checkLogin(this)">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+    
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>   
+    
+    
+        <button type="submit">Login</button>
+      </form>   
+    
+    
+      <script>
+        function checkLogin(form) {
+          const username = form.username.value;
+          const password = form.password.value;
+    
+          if (username === "Admin" && password === "Admin@123") {
+            alert("Login successful!");
+            return true; // Allow form submission
+          } else {
+            alert("Incorrect username or password.");
+            return false; // Prevent form submission
+          }
+        }
+      </script>
+</body>
+</html> -->

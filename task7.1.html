@@ -1,0 +1,78 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholarship Eligibility Checker</title>
+</head>
+<body>
+    <h1>Scholarship Eligibility Checker</h1>
+
+    <label for="studentName">Student Name:</label>
+    <input type="text" id="studentName" placeholder="Enter student name"><br><br>
+
+    <label for="gpa">GPA:</label>
+    <input type="number" id="gpa" placeholder="Enter GPA" step="0.01"><br><br>
+
+    <button onclick="checkScholarship()">Check Eligibility</button>
+
+    <h2>Scholarship Status:</h2>
+    <div id="scholarshipStatus"></div>
+
+    <script>
+        function checkScholarship() {
+            const studentName = document.getElementById('studentName').value;
+            const gpa = parseFloat(document.getElementById('gpa').value);
+
+            if (!studentName || isNaN(gpa)) {
+                document.getElementById('scholarshipStatus').innerText = "Please enter a valid name and GPA.";
+                return;
+            }
+
+            if (gpa >= 7.5) {
+                document.getElementById('scholarshipStatus').innerText = studentName + " is eligible for the scholarship.";
+            } else {
+                document.getElementById('scholarshipStatus').innerText = studentName + " is not eligible for the scholarship.";
+            }
+        }
+    </script>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholarship</title>
+    <script>
+        function gpastatus(){
+            let gpa = document.getElementById('gpa').value;
+            if(gpa>=7.5){
+                document.getElementById('status').innerHTML = `You are eligible for scholarship`;
+            }
+            else{
+                document.getElementById('status').innerHTML = `You are not eligible for scholarship`;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Student Scholarship Status</h1>
+    <br/>
+    <br/>
+    <label for="name">Please enter student name</label><br/>
+    <input type="text" id="name " required><br/>
+    <label for="Gpa">Please enter your GPA</label><br/>
+    <input type="number" id="gpa" required><br/><br/>
+    <button onclick="gpastatus()">Check status</button><br/><br/>
+    <h3 id="status"></h3>
+
+    
+
+
+
+</body>
+</html>

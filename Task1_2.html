@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login page</title>
+    <script>
+        function loginPage(){
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            if(username==="Admin" && password === "Admin@123"){
+                alert("username and password are correct");
+            }
+            else{
+            alert("Enter valid details");
+           }
+        }
+           
+    </script>
+</head>
+<body>
+    <form onsubmit="loginPage()">
+
+        <label for="username">Enter valid username</label>
+        <input type="text" id="username">
+
+        <br/>
+        <br/>
+
+        <label for="password">Password</label>
+        <input type="password" id="password">
+
+        <br/>
+        <br/>
+
+        <label for="submit"></label>
+        <input type="submit" id="submit" >
+    </form>
+</body>
+</html>

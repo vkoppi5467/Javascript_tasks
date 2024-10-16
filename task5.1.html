@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan</title>
+    <script>
+        let Loan = {
+            loanAmount: 0,
+            interestRate: 0,
+            loanTerm: 0, 
+            emisPaid: 0,
+
+            
+            calculateMonthlyPayment: function () {
+                let principal = this.loanAmount;
+                let monthlyInterestRate = (this.interestRate / 100) / 12;
+                let numOfPayments = this.loanTerm;
+
+               
+                let emi = principal * monthlyInterestRate * Math.pow((1 + monthlyInterestRate), numOfPayments) / (Math.pow((1 + monthlyInterestRate), numOfPayments) - 1);
+                return emi.toFixed(2);
+            },
+
+            checkLoanStatus: function () {
+                let emi = this.calculateMonthlyPayment();
+                let totalEmis = this.loanTerm;
+                let emisLeft = totalEmis - this.emisPaid;
+                let remainingAmount = emi * emisLeft;
+
+                return {
+                    emisPaid: this.emisPaid,
+                    emisLeft: emisLeft,
+                    remainingAmount: remainingAmount.toFixed(2) 
+                };
+            }
+        };
+
+        
+        function setLoanDetails(event) {
+            event.preventDefault();
+
+           
+            Loan.loanAmount = Number(document.getElementById("loanAmount").value);
+            Loan.interestRate = Number(document.getElementById("interestRate").value);
+            Loan.loanTerm = Number(document.getElementById("loanTerm").value);
+
+            
+            let emi = Loan.calculateMonthlyPayment();
+            document.getElementById("emiResult").innerText = `Your monthly EMI is: ₹${emi}`;
+        }
+
+        function checkLoanStatus() {
+            Loan.emisPaid = Number(document.getElementById("emisPaid").value); 
+
+            let status = Loan.checkLoanStatus();
+            let statusMessage = `
+                EMIs Paid: ${status.emisPaid} / ${Loan.loanTerm} \n
+                EMIs Left: ${status.emisLeft} \n
+                Remaining Amount (with interest): ₹${status.remainingAmount}
+            `;
+
+           
+            document.getElementById("loanStatusResult").innerText = statusMessage;
+        }
+    </script>
+</head>
+<body>
+    <h1>Loan</h1>
+
+    
+    <form onsubmit="setLoanDetails(event)">
+        <label for="loanAmount">Loan Amount (₹):</label><br>
+        <input type="number" id="loanAmount" required><br><br>
+
+        <label for="interestRate">Interest Rate (% per annum):</label><br>
+        <input type="number" id="interestRate" step="0.01" required><br><br>
+
+        <label for="loanTerm">Loan Term (months):</label><br>
+        <input type="number" id="loanTerm" required><br><br>
+
+        <input type="submit" value="Calculate EMI">
+    </form>
+
+    <p id="emiResult"></p>
+
+   
+    <h3>Check Loan Status</h3>
+    <label for="emisPaid">Enter the number of EMIs paid:</label><br>
+    <input type="number" id="emisPaid" required><br><br>
+
+    <button onclick="checkLoanStatus()">Check Loan Status</button>
+
+    <p id="loanStatusResult"></p>
+
+</body>
+</html>

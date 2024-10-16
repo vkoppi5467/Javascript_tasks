@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+    <script>
+        function fibo(){
+        let n = document.getElementById("size").value; 
+        let fibArr = [0,1];
+        revFib= [];
+        for(i=2;i<=n;i++){
+            fibArr[i] = fibArr[i-1] + fibArr[i-2];
+        }
+        for(let i= 0; i<=n; i++){
+            revFib[i]= fibArr[n-i-1];
+            if(revFib[i]==0){
+                break;
+            }
+        }
+        document.getElementById("displayFib").innerHTML = `Your fib series is ${revFib}`;
+        }
+        
+
+    </script>
+</head>
+<body>
+    <label for= "fibElements">Please enter the  number of the elements</label><br/><br/>
+    <input type="number" id="size"/>
+    <button onclick="fibo()">Submit</button>
+    <p id="displayFib"></p>
+
+</body>
+</html>
