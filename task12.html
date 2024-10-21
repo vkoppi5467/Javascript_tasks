@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Traslation</title>
+    <script>
+        function languageTraslate(){
+            let selectedLanguage= document.getElementById("option").value;
+            if(selectedLanguage=="english"){
+                document.getElementById("displayMessage").innerHTML = `Hi welcome to google translation ${selectedLanguage}`
+            }
+            else if(selectedLanguage=="telugu"){
+                document.getElementById("displayMessage").innerHTML=`గూగుల్ అనువాదానికి హాయ్ స్వాగతం ${selectedLanguage}`
+            }
+            else if (selectedLanguage === "Hindi") {
+                document.getElementById("displayMessage").innerHTML = `गूगल अनुवाद में आपका स्वागत है: ${selectedLanguage}`;
+            } 
+            else if (selectedLanguage === "french") {
+                document.getElementById("displayMessage").innerHTML = `Bienvenue à la traduction Google: ${selectedLanguage}`;
+            }
+        }
+    </script>
+</head>
+<body>
+    <select onchange="languageTraslate()" id="option">
+        <option value="english">english</option>
+        <option value="telugu">Telugu</option>
+        <option value="Hindi">Hindi</option>
+        <option value="french">French</option>
+    </select>
+    <p id="displayMessage"></p>
+</body>
+</html>

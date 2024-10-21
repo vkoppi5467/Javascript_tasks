@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #3897f0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3578e5;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Instagram Login</h2>
+        <form id="loginForm">
+            <input type="text" id="loginInput" placeholder="Email, Username or Mobile" required>
+            <p id="loginError" class="error"></p>
+            
+            <input type="password" id="password" placeholder="Password" required>
+            <p id="passwordError" class="error"></p>
+            
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const loginInput = document.getElementById('loginInput');
+        const passwordInput = document.getElementById('password');
+        const loginError = document.getElementById('loginError');
+        const passwordError = document.getElementById('passwordError');
+
+        function validateUsername(username) {
+            const usernamePattern = /^[a-zA-Z]+$/;
+            return usernamePattern.test(username);
+        }
+
+        function validateEmail(email) {
+            return email.endsWith('@gmail.com');
+        }
+
+
+        function validateMobile(mobile) {
+            const mobilePattern = /^\d{10}$/;
+            return mobilePattern.test(mobile);
+        }
+
+        function validatePassword(password) {
+            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+            return passwordPattern.test(password);
+        }
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); 
+
+            const loginValue = loginInput.value.trim();
+            const passwordValue = passwordInput.value.trim();
+
+            let isValid = true;
+
+            loginError.textContent = '';
+            passwordError.textContent = '';
+
+            if (validateEmail(loginValue)) {
+            } else if (validateMobile(loginValue)) {
+            } else if (validateUsername(loginValue)) {
+
+            } else {
+                loginError.textContent = 'Invalid email, username, or mobile number format.';
+                isValid = false;
+            }
+
+            // Validate password
+            if (!validatePassword(passwordValue)) {
+                passwordError.textContent = 'Password must be 8 characters long, and contain at least one uppercase, one lowercase, one digit, and one special character.';
+                isValid = false;
+            }
+
+            
+            if (isValid) {
+                alert('Login successful!');
+                loginForm.submit();
+            }
+        });
+    </script>
+</body>
+</html>

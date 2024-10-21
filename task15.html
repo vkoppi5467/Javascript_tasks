@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Reset Form</title>
+</head>
+<body>
+
+    <form>
+        <label for="newPassword">New Password:</label>
+        <input type="password" id="newPassword">
+        <br><br>
+
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword">
+        <br><br>
+
+        <button type="submit">Reset Password</button>
+    </form>
+
+    <script>
+
+
+        // Restrict copy and paste for New Password
+        document.getElementById('newPassword').oncopy = function() {
+            alert('Copy is restricted');
+            return false;
+        };
+
+        document.getElementById('newPassword').onpaste = function() {
+            alert('Paste is restricted');
+            return false;
+        };
+
+        // Restrict copy and paste for Confirm Password
+        document.getElementById('confirmPassword').oncopy = function() {
+            alert('Copy is restricted');
+            return false;
+        };
+
+        document.getElementById('confirmPassword').onpaste = function() {
+            alert('Paste is restricted');
+            return false;
+        };
+    </script>
+
+</body>
+</html>
